@@ -1,9 +1,0 @@
-           +-------+
-           | Chunk | a blob of data with a identity behalf of its meaning,
-           +-------+ and a size telling the blob's size.
-               \
-                \
-                 \
-                +-----------------+
-                | Container Chunk | variant of a RIFF chunk, that contains one or
-                +-----------------+ multiple subchunks (e.g LIST).
