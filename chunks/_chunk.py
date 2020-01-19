@@ -56,6 +56,8 @@ class NodeChunk(Chunk, list):
     A variant of a chunk that has one or multiple subchunks in it
     (e.g `RIFF`, `LIST`).
     """
+    # a space where a chunk reserves its data before the sub-chunks.
+    reservedbuf = None
 
     def append(self, chk: Chunk):
         """Appends a chunk to the end of the list."""
@@ -81,5 +83,8 @@ class NodeChunk(Chunk, list):
 
     def __bytes__(self):
         # combines all the chunkdata together.
-        Chunk.write(self, functools.reduce(lambda pchk, cchk: pchk + bytes(cchk), self, b''))
+        if isinstance(self.reservedbuf, bytes):
+            Chunk.append(self, self.reservedbuf)
+        
+        Chunk.append(self, functools.reduce(lambda pchk, cchk: pchk + bytes(cchk), self, b''))
         return Chunk.__bytes__(self)

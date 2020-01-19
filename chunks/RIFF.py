@@ -1,9 +1,11 @@
-"""
-RIFF chunk is the parent of all the chunks. It always
-stays the top of all the chunks.
-"""
-import _chunk
+from ._chunk import NodeChunk, Chunk
+import typing
 
-class RIFF(_chunk.NodeChunk):
-    def __init__(self):
-        _chunk.NodeChunk.__init__(self, b'RIFF')
+class RIFF(NodeChunk):
+    """
+    RIFF is parent of all the chunks.
+    This is a vitual chunk, who's under all the chunks live.
+    """
+    def __init__(self, fmt: typing.SupportsBytes):
+        NodeChunk.__init__(self, b'RIFF')
+        self.reservedbuf = bytes(fmt)
