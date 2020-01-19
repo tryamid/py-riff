@@ -1,4 +1,4 @@
-from ._chunk import NodeChunk, Chunk
+from .base import NodeChunk, Chunk
 import typing
 
 class RIFF(NodeChunk):
