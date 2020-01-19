@@ -84,7 +84,7 @@ class NodeChunk(Chunk, list):
     def __bytes__(self):
         # combines all the chunkdata together.
         if isinstance(self.reservedbuf, bytes):
-            Chunk.append(self, self.reservedbuf)
+            Chunk.write(self, self.reservedbuf)
         # concat chunks together.
         Chunk.append(self, functools.reduce(lambda achk, cchk: achk + bytes(cchk), self, b''))
         return Chunk.__bytes__(self)
