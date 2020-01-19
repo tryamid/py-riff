@@ -3,7 +3,7 @@ import subprocess
 
 setuptools.setup(
     name= 'py-riff',
-    version= subprocess.check_output(['git', 'describe', '--tags']).strip(),
+    version= subprocess.check_output(['git', 'describe', '--tags']).strip().decode('utf-8'),
     description= "An encoding only implementation of the RIFF",
     author= "Shantanu Biswas",
     author_email= "bsantanu381@gmail.com",
