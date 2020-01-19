@@ -37,7 +37,7 @@ class Chunk(typing.SupportsBytes):
         self.size+= len(data)
     
     def write(self, data: bytes):
-        """Overwrites a blob of bytes to the underlying buffer."""
+        """Overwrites with a blob of bytes in the underlying buffer."""
         if not isinstance(data, bytes):
             raise TypeError(f"Cannot write {type(data)} to underlying the buffer.")
 
