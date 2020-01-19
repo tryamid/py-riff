@@ -8,4 +8,6 @@ class RIFF(NodeChunk):
     """
     def __init__(self, fmt: typing.SupportsBytes):
         NodeChunk.__init__(self, b'RIFF')
+
+        # put the format name before actual data.
         self.reservedbuf = bytes(fmt)
