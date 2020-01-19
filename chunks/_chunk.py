@@ -85,6 +85,6 @@ class NodeChunk(Chunk, list):
         # combines all the chunkdata together.
         if isinstance(self.reservedbuf, bytes):
             Chunk.append(self, self.reservedbuf)
-        
-        Chunk.append(self, functools.reduce(lambda pchk, cchk: pchk + bytes(cchk), self, b''))
+        # concat chunks together.
+        Chunk.append(self, functools.reduce(lambda achk, cchk: achk + bytes(cchk), self, b''))
         return Chunk.__bytes__(self)
