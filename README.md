@@ -1,4 +1,6 @@
-OOP based [**RIFF** encoding][1] implementation in pure *Python*. These chunks can be decoded by the pre-packaged [`chunks`][2] module in
+[![PyPI version](https://badge.fury.io/py/py-riff.svg)](https://badge.fury.io/py/py-riff)
+
+OOP based [**RIFF** encoding][1] implementation in pure *Python*. Chunks can be decoded by the pre-packaged [`chunks`][2] module in
 the Python standard library.
 
 ### Ideology
