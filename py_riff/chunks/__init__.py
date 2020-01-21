@@ -21,12 +21,15 @@ class Chunk(typing.SupportsBytes):
     # a series of bytes that contain raw chunk data. 
     _rawdatbuf = b''
 
-    def __init__(self, id: bytes):
+    def __init__(self, id: bytes, bigendian= False):
         if not isinstance(id, bytes):
             raise TypeError(f"Identity must be a series of bytes and not {type(id)}.")
+        if not isinstance(bigendian, bool):
+            raise TypeError(f"Asked for whether big-endian, got {type(id)}.")
 
         self.id = id
         self.size = 0
+        self.endianness = '<' if bigendian else '>'
 
     def append(self, data: bytes):
         """Appends a blob of bytes to the underlying buffer."""
@@ -46,10 +49,8 @@ class Chunk(typing.SupportsBytes):
 
     def __bytes__(self):
         return (self.id +
-                struct.pack('>I', self.size) +
+                struct.pack(self.endianness + 'I' , self.size) +
                 self._rawdatbuf)
-    
-
 
 class NodeChunk(Chunk, list):
     """
