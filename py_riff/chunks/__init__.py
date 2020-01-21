@@ -3,8 +3,9 @@ RIFF is a object-oriented file-format that uses chunk to label each
 data with a meaning and a size. In this API chunks base chunks come
 in two flavours — leaf chunk, node chunk.
 
-- Leaf Chunk: has no sub-chunks in it, only raw binary data.
-- Node Chunk: has one or more sub-chunks in it.
+* Chunk types:
+    * Leaf: has no sub-chunks in it, only raw binary data.
+    * Node: has one or more sub-chunks in it.
 """
 
 import struct
