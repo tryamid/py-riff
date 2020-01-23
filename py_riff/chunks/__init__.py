@@ -53,6 +53,9 @@ class Chunk(typing.SupportsBytes):
                 struct.pack(self.endianness + 'I' , self.size) +
                 self._rawdatbuf)
 
+class ChunkEndiannessDifference(Exception):
+   """Subchunk differing in endianness from the root chunk."""
+
 class NodeChunk(Chunk, list):
     """
     A variant of a chunk that has one or multiple subchunks in it
@@ -65,6 +68,8 @@ class NodeChunk(Chunk, list):
         """Appends a chunk to the end of the list."""
         if not isinstance(chk, Chunk):
             raise TypeError("Not a valid chunk to append.")
+        if chk.endianness != self.endianness:
+            raise ChunkEndiannessDifference(f"{chk.id} differs from {self.id}")
 
         list.append(self, chk)
 
@@ -73,13 +78,17 @@ class NodeChunk(Chunk, list):
         for chk in chks:
             if not isinstance(chk, Chunk):
                 raise TypeError("Not a valid chunk to append with.")
+            if chk.endianness != self.endianness:
+               raise ChunkEndiannessDifference(f"{chk.id} differs from {self.id}")
             
-            list.extend(self, chk)
+         list.extend(self, chk)
 
     def insert(self, index, chk: Chunk):
         """Inserts a chunk at an arbitary position in the datablock."""
         if not isinstance(chk, Chunk):
             raise TypeError("Not a valid chunk to insert.")
+        if chk.endianness != self.endianness:
+            raise ChunkEndiannessDifference(f"{chk.id} differs from {self.id}")
 
         list.insert(self, index, chk)
 
