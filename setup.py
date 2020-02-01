@@ -9,7 +9,7 @@ setuptools.setup(
     description= "An encoding only implementation of the RIFF",
     author= "Shantanu Biswas",
     author_email= "bsantanu381@gmail.com",
-    py_modules= [
+    packages= [
         'py_riff.chunks'
     ],
     url= "https://github.com/tryamid/py_riff",
