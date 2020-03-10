@@ -23,28 +23,17 @@ class Chunk(typing.SupportsBytes):
     _rawdatbuf = b''
 
     def __init__(self, id: bytes, bigendian= False):
-        if not isinstance(id, bytes):
-            raise TypeError(f"Identity must be a series of bytes and not {type(id)}.")
-        if not isinstance(bigendian, bool):
-            raise TypeError(f"Asked for whether big-endian, got {type(id)}.")
-
         self.id = id
         self.size = 0
-        self.endianness = '<' if bigendian else '>'
+        self.endianness = '<>'[bigendian]
 
     def append(self, data: bytes):
         """Appends a blob of bytes to the underlying buffer."""
-        if not isinstance(data, bytes):
-            raise TypeError(f"Cannot append {type(data)} to underlying the buffer.")
-
         self._rawdatbuf+= data
         self.size+= len(data)
     
     def write(self, data: bytes):
         """Overwrites with a blob of bytes in the underlying buffer."""
-        if not isinstance(data, bytes):
-            raise TypeError(f"Cannot write {type(data)} to underlying the buffer.")
-
         self._rawdatbuf = data
         self.size = len(data)
 
