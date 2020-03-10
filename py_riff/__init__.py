@@ -70,7 +70,7 @@ class NodeChunk(Chunk, list):
             if chk.endianness != self.endianness:
                raise ChunkEndiannessDifference(f"{chk.id} differs from {self.id}")
             
-         list.extend(self, chk)
+        list.extend(self, chk)
 
     def insert(self, index, chk: Chunk):
         """Inserts a chunk at an arbitary position in the datablock."""
